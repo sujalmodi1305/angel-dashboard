@@ -26,6 +26,11 @@ creds = service_account.Credentials.from_service_account_info(
 service = build("sheets", "v4", credentials=creds)
 sheet = service.spreadsheets()
 
+# List all sheet names in the spreadsheet for debugging
+meta = sheet.get(spreadsheetId=SHEET_ID).execute()
+sheet_titles = [s['properties']['title'] for s in meta['sheets']]
+st.write("✅ Sheets available in this file:", sheet_titles)
+
 # Read the full sheet data as a list of lists
 result = sheet.values().get(
     spreadsheetId=SHEET_ID,
