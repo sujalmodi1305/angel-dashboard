@@ -22,6 +22,21 @@ creds = service_account.Credentials.from_service_account_info(
     scopes=["https://www.googleapis.com/auth/spreadsheets.readonly"]
 )
 
+from googleapiclient.discovery import build
+
+drive_service = build('drive', 'v3', credentials=creds)
+results = drive_service.files().list(
+    q="mimeType='application/vnd.google-apps.spreadsheet'",
+    pageSize=100,
+    fields="files(id, name)").execute()
+items = results.get('files', [])
+if not items:
+    st.write('No Google Sheets found for this account.')
+else:
+    st.write('Google Sheets visible to this service account:')
+    for item in items:
+        st.write(f"{item['name']}: {item['id']}")
+
 # Connect to the Sheets API
 service = build("sheets", "v4", credentials=creds)
 sheet = service.spreadsheets()
