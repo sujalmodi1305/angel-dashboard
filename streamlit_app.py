@@ -9,7 +9,7 @@ st.set_page_config(page_title="Client PnL Dashboard", layout="wide")
 st.title("📊 Client PnL Dashboard")
 
 # Google Sheets settings
-SHEET_ID = "1o8mOKcWMseegoZAMFavVuwPnKGfm7cYtCp2MvhxntIY"
+SHEET_ID = "1eR0N0Vnq-FD5fuvikGDtK_ODXQCHv2i18y1EgtbIQKw"
 SHEET_NAME = "Clients Daily PNL"  # Change if needed
 
 # Authenticate with Service Account in Streamlit secrets
