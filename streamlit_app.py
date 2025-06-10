@@ -29,8 +29,6 @@ creds = service_account.Credentials.from_service_account_info(
     scopes=["https://www.googleapis.com/auth/drive.readonly"]
 )
 # ... (rest of logic)
-
-
     # Search and download Excel file from Drive
     drive_service = build("drive", "v3", credentials=creds)
     results = drive_service.files().list(q=f"name='{GDRIVE_FILE_NAME}' and mimeType='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'",
