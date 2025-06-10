@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+matplotlib
+google-auth
+google-api-python-client
+openpyxl
