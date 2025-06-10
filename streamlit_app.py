@@ -20,13 +20,16 @@ st.title("📊 Client PnL Dashboard")
 GDRIVE_FILE_NAME = "Angel Dashboard"
 EXCEL_SHEET_NAME = "Clients Daily PNL"
 
-uploaded_json = st.file_uploader("Upload your Google Service Account JSON file", type="json")
+if "service_account" not in st.secrets:
+    st.error("Service account not found in Streamlit secrets. Please set this in your app's Settings > Secrets.")
+    st.stop()
 
-if uploaded_json:
-    creds = service_account.Credentials.from_service_account_info(
-        pd.read_json(uploaded_json).to_dict(orient='records')[0],
-        scopes=["https://www.googleapis.com/auth/drive.readonly"]
-    )
+creds = service_account.Credentials.from_service_account_info(
+    dict(st.secrets["service_account"]),
+    scopes=["https://www.googleapis.com/auth/drive.readonly"]
+)
+# ... (rest of logic)
+
 
     # Search and download Excel file from Drive
     drive_service = build("drive", "v3", credentials=creds)
